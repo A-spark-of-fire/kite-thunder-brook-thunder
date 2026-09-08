@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="SUPEYO">
+  <rect width="32" height="32" rx="8" fill="#0B3D91"/>
+  <path fill="#1AA7D9" d="M16.2 4.6c0 0-7.4 8.4-7.4 13.2a7.4 7.4 0 1 0 14.8 0c0-4.8-7.4-13.2-7.4-13.2z"/>
+  <path fill="#F4F9FC" d="M16.2 6.4c0 0-5.7 6.6-5.7 11.4a5.7 5.7 0 1 0 11.4 0c0-4.8-5.7-11.4-5.7-11.4z"/>
+  <circle cx="14.3" cy="14.2" r="1.7" fill="#F4F9FC" fill-opacity=".85"/>
+</svg>

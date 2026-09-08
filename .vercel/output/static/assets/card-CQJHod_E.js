@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-0vZSBttN.js";import{n as t}from"./utils-DKPc2m_0.js";var n=e();function r({className:e,...r}){return(0,n.jsx)(`div`,{className:t(`rounded-3xl border border-line bg-paper p-5 shadow-card`,e),...r})}export{r as t};
