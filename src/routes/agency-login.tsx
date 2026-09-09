@@ -107,14 +107,6 @@ function AgencyLoginPage() {
           </Button>
         </form>
 
-        <div className="mt-5 rounded-2xl border border-line bg-ice p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted">Approved accounts</p>
-          <div className="mt-3 space-y-2 text-xs text-muted">
-            <p>Admin: agency.admin@supeyo.in / AgencyDesk!2026</p>
-            <p>Staff: agency.staff@supeyo.in / DeskStaff!2026</p>
-          </div>
-        </div>
-
         <div className="mt-5 text-center text-sm">
           <Link to="/" className="text-brand hover:underline">Back to customer portal</Link>
         </div>

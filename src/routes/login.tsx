@@ -57,19 +57,12 @@ function LoginPage() {
               <div className="h-px bg-line" />
               <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-paper px-2 text-xs text-muted">or continue with</span>
             </div>
-            <div className="grid gap-2">
-              {GROK_PROVIDERS.map((p) => (
-                <Button key={p.providerId} type="button" variant="secondary" onClick={() => signIn(p.providerId, { callbackURL: "/" })}>
-                  Continue with {p.label}
-                </Button>
-              ))}
-            </div>
+            
             <div className="mt-6 rounded-2xl border border-line bg-ice p-3">
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted">Agency desk access</p>
               <Link to="/agency-login" className="mt-3 inline-flex w-full items-center justify-center rounded-2xl bg-navy px-4 py-3 text-sm font-medium text-paper hover:opacity-95">
                 Open agency desk login
               </Link>
-              <p className="mt-3 text-xs text-muted">Approved accounts only: agency.admin@supeyo.in / AgencyDesk!2026 and agency.staff@supeyo.in / DeskStaff!2026</p>
             </div>
           </>
         ) : <p className="mt-4 text-sm text-muted">Sign-in is disabled.</p>}
