@@ -108,6 +108,7 @@ const previewAllowedHosts: string[] = [...PREVIEW_ALLOWED_HOSTS];
 // these for the same server — trusting only `localhost` rejects `127.0.0.1` and
 // breaks email/password with "Invalid origin".
 const LOCAL_DEV_ORIGINS: string[] = [
+  "https://supeyo.vercel.app",
   "http://localhost:8080",
   "http://127.0.0.1:8080",
   "http://[::1]:8080",
