@@ -78,7 +78,6 @@ function ProfileForm() {
         <Field label="Landmark"><Input value={form.landmark} onChange={(e) => set("landmark", e.target.value)} /></Field>
       </Card>
       <Button className="w-full" disabled={busy} onClick={save}>{busy ? "Saving…" : "Save profile"}</Button>
-      {profile?.canAccessAdmin ? <Button asChild variant="navy" className="w-full"><Link to="/admin">Open agency desk</Link></Button> : null}
       <Card className="flex items-center justify-between">
         <div><p className="text-sm font-medium">Need help?</p><p className="text-xs text-muted">{AGENCY.phones[0]}</p></div>
         <Button asChild variant="secondary" size="sm"><Link to="/contact">Contact</Link></Button>

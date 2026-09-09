@@ -64,10 +64,19 @@ function LoginPage() {
                 </Button>
               ))}
             </div>
+            <div className="mt-6 rounded-2xl border border-line bg-ice p-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted">Agency desk access</p>
+              <Link to="/agency-login" className="mt-3 inline-flex w-full items-center justify-center rounded-2xl bg-navy px-4 py-3 text-sm font-medium text-paper hover:opacity-95">
+                Open agency desk login
+              </Link>
+              <p className="mt-3 text-xs text-muted">Approved accounts only: agency.admin@supeyo.in / AgencyDesk!2026 and agency.staff@supeyo.in / DeskStaff!2026</p>
+            </div>
           </>
         ) : <p className="mt-4 text-sm text-muted">Sign-in is disabled.</p>}
         <p className="mt-6 text-center text-xs text-muted">{AGENCY.company} · {AGENCY.phones[0]}</p>
-        <p className="mt-2 text-center text-xs"><Link to="/admin" className="text-muted hover:text-brand">Agency staff desk</Link></p>
+        <p className="mt-2 text-center text-xs text-muted">
+          Need agency access? <Link to="/agency-login" className="font-medium text-brand underline-offset-4 hover:underline">Agency desk login</Link>
+        </p>
       </div>
     </div>
   );

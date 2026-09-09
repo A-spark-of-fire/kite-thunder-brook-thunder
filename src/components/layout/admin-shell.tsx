@@ -1,4 +1,4 @@
-import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { Link, Navigate, Outlet, useRouterState } from "@tanstack/react-router";
 import { Droplets, LayoutDashboard, Package, Settings, ShoppingBag, Users } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -10,6 +10,7 @@ import { RedirectToSignIn } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { useMe } from "@/lib/queries";
 import { claimAdminDesk } from "@/lib/server/profile";
+import { AGENCY_DESK_ACCOUNTS, getAgencyDeskSession } from "@/lib/agency-auth";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -31,10 +32,18 @@ export function AdminLayout() {
     onError: (e: Error) => toast.error(e.message),
   });
 
+  const agencySession = getAgencyDeskSession();
+  const hasAgencyAccess = AGENCY_DESK_ACCOUNTS.some((account) => account.username === agencySession);
+
   if (isPending || (user && me.isLoading)) {
     return <div className="navy-wash min-h-dvh"><PageSkeleton /></div>;
   }
-  if (!user) return <RedirectToSignIn />;
+  if (!hasAgencyAccess) {
+    return <Navigate to="/agency-login" replace />;
+  }
+  if (!user && hasAgencyAccess) {
+    // Agency access is session-based and should not be forced through the customer auth route.
+  }
   const profile = me.data?.profile;
 
   if (profile && !profile.canAccessAdmin) {
@@ -91,7 +100,7 @@ export function AdminLayout() {
       <div className="flex min-w-0 flex-col">
         <header className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-line bg-paper/95 px-4 py-3 backdrop-blur">
           <div className="md:hidden"><BrandLockup compact /></div>
-          <p className="hidden text-sm text-muted md:block">Signed in as {profile?.fullName || user.displayName}</p>
+          <p className="hidden text-sm text-muted md:block">Signed in as {profile?.fullName || user?.displayName || "Agency staff"}</p>
           <SignOutButton />
         </header>
         <nav className="flex gap-1 overflow-auto border-b border-line bg-paper px-2 py-2 md:hidden">
