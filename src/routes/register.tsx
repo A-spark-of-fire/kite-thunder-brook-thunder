@@ -58,12 +58,6 @@ function RegisterPage() {
               <Button type="submit" className="w-full" disabled={busy}>{busy ? "Creating account…" : "Create account"}</Button>
             </form>
             <p className="mt-3 text-center text-sm text-muted">Already registered? <Link to="/login" className="text-brand">Sign in</Link></p>
-            <div className="relative my-6"><div className="h-px bg-line" /><span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-paper px-2 text-xs text-muted">or</span></div>
-            <div className="grid gap-2">
-              {GROK_PROVIDERS.map((p) => (
-                <Button key={p.providerId} type="button" variant="secondary" onClick={() => signIn(p.providerId, { callbackURL: "/" })}>Continue with {p.label}</Button>
-              ))}
-            </div>
           </>
         ) : <p className="mt-4 text-sm text-muted">Registration is disabled.</p>}
       </div>
