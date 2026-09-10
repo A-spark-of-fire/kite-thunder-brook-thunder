@@ -69,24 +69,32 @@ export async function requireAdmin(userId: string): Promise<Profile> {
 
 export const ensureAgencyDesk = createServerFn({ method: "POST" })
   .handler(async () => {
-    const { seedAgencyAccounts } = await import("@/lib/auth/seed-agency");
-    await seedAgencyAccounts();
+    try {
+      const { seedAgencyAccounts } = await import("@/lib/auth/seed-agency");
+      await seedAgencyAccounts();
+    } catch (err) {
+      console.warn("Agency desk account seeding skipped/failed:", err);
+    }
     return { ok: true as const };
   });
+
 
 export const getMe = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }): Promise<MePayload> => {
-    const { seedAgencyAccounts } = await import("@/lib/auth/seed-agency");
-    await seedAgencyAccounts();
+    try {
+      const { seedAgencyAccounts } = await import("@/lib/auth/seed-agency");
+      await seedAgencyAccounts();
+    } catch (err) {
+      console.warn("Agency desk account seeding skipped/failed in getMe:", err);
+    }
     const sql = await getSql();
     const profile = await loadProfile(context.userId);
     const settingsRows = await sql<Record<string, unknown>>`select * from agency_settings where id = 1`;
-    const unread = await sql<{ n: number }>`
-      select count(*)::int as n from notifications where user_id = ${context.userId} and is_read = false
-    `;
-    return { profile, settings: mapSettings(settingsRows[0]), unreadCount: num(unread[0]?.n) };
+    const unread = await sql<{ n: number }>`select count(*)::int as n from notifications where user_id = ${context.userId} and is_read = false`;
+    return { profile, settings: mapSettings(settingsRows), unreadCount: num(unread?.n) };
   });
+
 
 export const updateMyProfile = createServerFn({ method: "POST" })
   .middleware([authMiddleware])

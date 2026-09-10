@@ -1,4 +1,12 @@
 {
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "migrations/**"
+    },
+    "api/**/*.ts": {
+      "includeFiles": "migrations/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
