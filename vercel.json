@@ -1,9 +1,6 @@
 {
   "functions": {
-    "api/**/*.js": {
-      "includeFiles": "migrations/**"
-    },
-    "api/**/*.ts": {
+    "src/routes/api/**/*.ts": {
       "includeFiles": "migrations/**"
     }
   },
