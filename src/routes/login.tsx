@@ -3,7 +3,7 @@ import { type FormEvent, useEffect, useState } from "react";
 import { BrandLockup } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/input";
-import { GROK_PROVIDERS, authClient, authEnabled, signIn } from "@/lib/auth/client";
+import { authClient, authEnabled } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AGENCY } from "@/lib/agency";
 
@@ -52,17 +52,6 @@ function LoginPage() {
             <div className="mt-3 flex justify-between text-sm">
               <Link to="/forgot-password" className="text-brand">Forgot password?</Link>
               <Link to="/register" className="text-brand">Create account</Link>
-            </div>
-            <div className="relative my-6">
-              <div className="h-px bg-line" />
-              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-paper px-2 text-xs text-muted">or continue with</span>
-            </div>
-            <div className="grid gap-2">
-              {GROK_PROVIDERS.map((p) => (
-                <Button key={p.providerId} type="button" variant="secondary" onClick={() => signIn(p.providerId, { callbackURL: "/" })}>
-                  Continue with {p.label}
-                </Button>
-              ))}
             </div>
           </>
         ) : <p className="mt-4 text-sm text-muted">Sign-in is disabled.</p>}

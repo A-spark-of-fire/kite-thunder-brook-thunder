@@ -3,7 +3,7 @@ import { type FormEvent, useState } from "react";
 import { BrandLockup } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/input";
-import { GROK_PROVIDERS, authClient, authEnabled, signIn } from "@/lib/auth/client";
+import { authClient, authEnabled } from "@/lib/auth/client";
 import { saveMyAddress, updateMyProfile } from "@/lib/server/profile";
 import { indianMobile } from "@/lib/utils";
 
