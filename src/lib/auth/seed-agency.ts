@@ -1,25 +1,50 @@
-import { hashPassword } from "better-auth/crypto";
+import { hashPassword, verifyPassword } from "better-auth/crypto";
 import { getSql } from "../db";
 
-const AGENCY_ACCOUNTS = [
+/**
+ * Server-only agency desk accounts. Do not import this module from client code.
+ * Passwords are hashed into Better Auth's `account` table on first use.
+ */
+export const AGENCY_STAFF = [
   {
-    email: "agency.admin@supeyo.in",
-    password: "AgencyDesk!2026",
-    name: "Agency Admin",
+    email: "ananda.hazra@supeyo.in",
+    password: "KsE-Hazra#9n4Qx7Wm",
+    name: "Ananda Hazra",
     role: "admin",
+    mobile: "8617297495",
   },
   {
-    email: "agency.staff@supeyo.in",
-    password: "DeskStaff!2026",
-    name: "Agency Staff",
+    email: "kalpataru.desk@supeyo.in",
+    password: "Nadia-Desk$4vR8kLp2",
+    name: "Kalpataru Desk",
     role: "staff",
+    mobile: "8967648044",
   },
 ] as const;
 
-export async function seedAgencyAccounts() {
+export type AgencyStaffEmail = (typeof AGENCY_STAFF)[number]["email"];
+
+export function isAgencyStaffEmail(email: string): boolean {
+  const normalized = email.trim().toLowerCase();
+  return AGENCY_STAFF.some((account) => account.email === normalized);
+}
+
+const globalRef = globalThis as typeof globalThis & {
+  __supeyoAgencySeed__?: Promise<void>;
+};
+
+export function seedAgencyAccounts(): Promise<void> {
+  globalRef.__supeyoAgencySeed__ ??= seedOnce().catch((err) => {
+    globalRef.__supeyoAgencySeed__ = undefined;
+    throw err;
+  });
+  return globalRef.__supeyoAgencySeed__;
+}
+
+async function seedOnce(): Promise<void> {
   const sql = await getSql();
 
-  for (const account of AGENCY_ACCOUNTS) {
+  for (const account of AGENCY_STAFF) {
     const email = account.email.toLowerCase();
     const existingUser = await sql<{ id: string }>`
       select id from "user" where email = ${email} limit 1
@@ -30,7 +55,7 @@ export async function seedAgencyAccounts() {
       userId = existingUser[0].id;
       await sql`
         update "user"
-        set name = ${account.name}, "updatedAt" = now()
+        set name = ${account.name}, "emailVerified" = true, "updatedAt" = now()
         where id = ${userId}
       `;
     } else {
@@ -41,48 +66,49 @@ export async function seedAgencyAccounts() {
       `;
     }
 
-    const credential = await sql<{ id: string }>`
-      select id from "account"
+    const credential = await sql<{ id: string; password: string | null }>`
+      select id, password from "account"
       where "userId" = ${userId} and "providerId" = 'credential'
       limit 1
     `;
 
-    const passwordHash = await hashPassword(account.password);
+    const currentHash = credential[0]?.password ?? "";
+    const alreadyMatches = currentHash
+      ? await verifyPassword({ hash: currentHash, password: account.password })
+      : false;
 
-    if (credential[0]) {
-      await sql`
-        update "account"
-        set password = ${passwordHash}, "updatedAt" = now()
-        where id = ${credential[0].id}
-      `;
-    } else {
-      await sql`
-        insert into "account" (
-          id,
-          "accountId",
-          "providerId",
-          "userId",
-          password,
-          "createdAt",
-          "updatedAt"
-        ) values (
-          ${`credential-${crypto.randomUUID()}`},
-          ${userId},
-          'credential',
-          ${userId},
-          ${passwordHash},
-          now(),
-          now()
-        )
-      `;
+    if (!alreadyMatches) {
+      const passwordHash = await hashPassword(account.password);
+      if (credential[0]) {
+        await sql`
+          update "account"
+          set password = ${passwordHash}, "updatedAt" = now()
+          where id = ${credential[0].id}
+        `;
+      } else {
+        await sql`
+          insert into "account" (
+            id, "accountId", "providerId", "userId", password, "createdAt", "updatedAt"
+          ) values (
+            ${`credential-${crypto.randomUUID()}`},
+            ${userId},
+            'credential',
+            ${userId},
+            ${passwordHash},
+            now(),
+            now()
+          )
+        `;
+      }
     }
 
     await sql`
       insert into profiles (user_id, role, full_name, mobile, alt_mobile, created_at, updated_at)
-      values (${userId}, ${account.role}, ${account.name}, '0000000000', '', now(), now())
+      values (${userId}, ${account.role}, ${account.name}, ${account.mobile}, '', now(), now())
       on conflict (user_id) do update set
         role = excluded.role,
         full_name = excluded.full_name,
+        mobile = excluded.mobile,
         updated_at = now()
     `;
   }

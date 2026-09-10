@@ -67,9 +67,18 @@ export async function requireAdmin(userId: string): Promise<Profile> {
   return profile;
 }
 
+export const ensureAgencyDesk = createServerFn({ method: "POST" })
+  .handler(async () => {
+    const { seedAgencyAccounts } = await import("@/lib/auth/seed-agency");
+    await seedAgencyAccounts();
+    return { ok: true as const };
+  });
+
 export const getMe = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }): Promise<MePayload> => {
+    const { seedAgencyAccounts } = await import("@/lib/auth/seed-agency");
+    await seedAgencyAccounts();
     const sql = await getSql();
     const profile = await loadProfile(context.userId);
     const settingsRows = await sql<Record<string, unknown>>`select * from agency_settings where id = 1`;

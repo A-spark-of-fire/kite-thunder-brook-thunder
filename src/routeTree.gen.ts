@@ -14,6 +14,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AgencyLoginRouteImport } from './routes/agency-login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as KseOpsRouteImport } from './routes/kse-ops'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OrderRouteImport } from './routes/order'
 import { Route as OrdersRouteImport } from './routes/orders'
@@ -24,6 +25,7 @@ import { Route as AdminCustomersRouteImport } from './routes/admin/customers'
 import { Route as AdminOrdersRouteImport } from './routes/admin/orders'
 import { Route as AdminProductsRouteImport } from './routes/admin/products'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as ApiDeskRouteImport } from './routes/api/desk'
 import { Route as OrdersIndexRouteImport } from './routes/orders/index'
 import { Route as OrdersOrderIdRouteImport } from './routes/orders/$orderId'
 import { Route as AdminOrdersIndexRouteImport } from './routes/admin/orders/index'
@@ -53,6 +55,11 @@ const ContactRoute = ContactRouteImport.update({
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KseOpsRoute = KseOpsRouteImport.update({
+  id: '/kse-ops',
+  path: '/kse-ops',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -105,6 +112,11 @@ const AdminSettingsRoute = AdminSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiDeskRoute = ApiDeskRouteImport.update({
+  id: '/api/desk',
+  path: '/api/desk',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrdersIndexRoute = OrdersIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -137,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/agency-login': typeof AgencyLoginRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/kse-ops': typeof KseOpsRoute
   '/login': typeof LoginRoute
   '/order': typeof OrderRoute
   '/orders': typeof OrdersRouteWithChildren
@@ -146,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/admin/orders': typeof AdminOrdersRouteWithChildren
   '/admin/products': typeof AdminProductsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/api/desk': typeof ApiDeskRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/admin/': typeof AdminIndexRoute
   '/orders/': typeof OrdersIndexRoute
@@ -158,6 +172,7 @@ export interface FileRoutesByTo {
   '/agency-login': typeof AgencyLoginRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/kse-ops': typeof KseOpsRoute
   '/login': typeof LoginRoute
   '/order': typeof OrderRoute
   '/profile': typeof ProfileRoute
@@ -165,6 +180,7 @@ export interface FileRoutesByTo {
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/products': typeof AdminProductsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/api/desk': typeof ApiDeskRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/admin': typeof AdminIndexRoute
   '/orders': typeof OrdersIndexRoute
@@ -179,6 +195,7 @@ export interface FileRoutesById {
   '/agency-login': typeof AgencyLoginRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/kse-ops': typeof KseOpsRoute
   '/login': typeof LoginRoute
   '/order': typeof OrderRoute
   '/orders': typeof OrdersRouteWithChildren
@@ -188,6 +205,7 @@ export interface FileRoutesById {
   '/admin/orders': typeof AdminOrdersRouteWithChildren
   '/admin/products': typeof AdminProductsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/api/desk': typeof ApiDeskRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/admin/': typeof AdminIndexRoute
   '/orders/': typeof OrdersIndexRoute
@@ -203,6 +221,7 @@ export interface FileRouteTypes {
     | '/agency-login'
     | '/contact'
     | '/forgot-password'
+    | '/kse-ops'
     | '/login'
     | '/order'
     | '/orders'
@@ -212,6 +231,7 @@ export interface FileRouteTypes {
     | '/admin/orders'
     | '/admin/products'
     | '/admin/settings'
+    | '/api/desk'
     | '/orders/$orderId'
     | '/admin/'
     | '/orders/'
@@ -224,6 +244,7 @@ export interface FileRouteTypes {
     | '/agency-login'
     | '/contact'
     | '/forgot-password'
+    | '/kse-ops'
     | '/login'
     | '/order'
     | '/profile'
@@ -231,6 +252,7 @@ export interface FileRouteTypes {
     | '/admin/customers'
     | '/admin/products'
     | '/admin/settings'
+    | '/api/desk'
     | '/orders/$orderId'
     | '/admin'
     | '/orders'
@@ -244,6 +266,7 @@ export interface FileRouteTypes {
     | '/agency-login'
     | '/contact'
     | '/forgot-password'
+    | '/kse-ops'
     | '/login'
     | '/order'
     | '/orders'
@@ -253,6 +276,7 @@ export interface FileRouteTypes {
     | '/admin/orders'
     | '/admin/products'
     | '/admin/settings'
+    | '/api/desk'
     | '/orders/$orderId'
     | '/admin/'
     | '/orders/'
@@ -267,11 +291,13 @@ export interface RootRouteChildren {
   AgencyLoginRoute: typeof AgencyLoginRoute
   ContactRoute: typeof ContactRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  KseOpsRoute: typeof KseOpsRoute
   LoginRoute: typeof LoginRoute
   OrderRoute: typeof OrderRoute
   OrdersRoute: typeof OrdersRouteWithChildren
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
+  ApiDeskRoute: typeof ApiDeskRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -310,6 +336,13 @@ declare module '@tanstack/react-router' {
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kse-ops': {
+      id: '/kse-ops'
+      path: '/kse-ops'
+      fullPath: '/kse-ops'
+      preLoaderRoute: typeof KseOpsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -381,6 +414,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/settings'
       preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/api/desk': {
+      id: '/api/desk'
+      path: '/api/desk'
+      fullPath: '/api/desk'
+      preLoaderRoute: typeof ApiDeskRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/orders/': {
       id: '/orders/'
@@ -471,11 +511,13 @@ const rootRouteChildren: RootRouteChildren = {
   AgencyLoginRoute: AgencyLoginRoute,
   ContactRoute: ContactRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  KseOpsRoute: KseOpsRoute,
   LoginRoute: LoginRoute,
   OrderRoute: OrderRoute,
   OrdersRoute: OrdersRouteWithChildren,
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
+  ApiDeskRoute: ApiDeskRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

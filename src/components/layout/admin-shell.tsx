@@ -1,7 +1,5 @@
-import { Link, Navigate, Outlet, useRouterState } from "@tanstack/react-router";
+import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { Droplets, LayoutDashboard, Package, Settings, ShoppingBag, Users } from "lucide-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
 import { BrandLockup } from "@/components/brand/logo";
 import { SignOutButton } from "@/components/layout/sign-out-button";
 import { Button } from "@/components/ui/button";
@@ -9,8 +7,6 @@ import { PageSkeleton } from "@/components/ui/skeleton";
 import { RedirectToSignIn } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { useMe } from "@/lib/queries";
-import { claimAdminDesk } from "@/lib/server/profile";
-import { AGENCY_DESK_ACCOUNTS, getAgencyDeskSession } from "@/lib/agency-auth";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -25,28 +21,15 @@ export function AdminLayout() {
   const { user, isPending } = useCurrentUserState();
   const me = useMe(Boolean(user) && !isPending);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const qc = useQueryClient();
-  const claim = useMutation({
-    mutationFn: () => claimAdminDesk(),
-    onSuccess: async () => { await qc.invalidateQueries({ queryKey: ["me"] }); toast.success("Agency desk is ready."); },
-    onError: (e: Error) => toast.error(e.message),
-  });
-
-  const agencySession = getAgencyDeskSession();
-  const hasAgencyAccess = AGENCY_DESK_ACCOUNTS.some((account) => account.username === agencySession);
 
   if (isPending || (user && me.isLoading)) {
     return <div className="navy-wash min-h-dvh"><PageSkeleton /></div>;
   }
-  if (!hasAgencyAccess) {
-    return <Navigate to="/agency-login" replace />;
-  }
-  if (!user && hasAgencyAccess) {
-    // Agency access is session-based and should not be forced through the customer auth route.
-  }
+  if (!user) return <RedirectToSignIn to="/kse-ops" />;
   const profile = me.data?.profile;
+  const isStaff = profile?.role === "admin" || profile?.role === "staff";
 
-  if (profile && !profile.canAccessAdmin) {
+  if (profile && !isStaff) {
     return (
       <div className="water-wash grid min-h-dvh place-items-center px-4">
         <div className="max-w-md rounded-3xl border border-line bg-paper p-8 text-center shadow-card">
@@ -54,22 +37,6 @@ export function AdminLayout() {
           <h1 className="mt-3 font-display text-xl font-semibold">Staff only</h1>
           <p className="mt-2 text-sm text-muted">The agency desk is for SUPEYO staff.</p>
           <Button asChild className="mt-5"><Link to="/">Go to my portal</Link></Button>
-        </div>
-      </div>
-    );
-  }
-
-  if (profile && !profile.adminExists) {
-    return (
-      <div className="water-wash grid min-h-dvh place-items-center px-4">
-        <div className="max-w-md rounded-3xl border border-line bg-paper p-8 text-center shadow-card">
-          <BrandLockup />
-          <h1 className="mt-5 font-display text-xl font-semibold">Set up the agency desk</h1>
-          <p className="mt-2 text-sm text-muted">No administrator yet. Claim the desk to manage products, orders, and deliveries.</p>
-          <Button className="mt-5 w-full" onClick={() => claim.mutate()} disabled={claim.isPending}>
-            {claim.isPending ? "Setting up…" : "Become administrator"}
-          </Button>
-          <Link to="/" className="mt-3 inline-block text-sm text-brand">Back to customer portal</Link>
         </div>
       </div>
     );
@@ -100,7 +67,7 @@ export function AdminLayout() {
       <div className="flex min-w-0 flex-col">
         <header className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-line bg-paper/95 px-4 py-3 backdrop-blur">
           <div className="md:hidden"><BrandLockup compact /></div>
-          <p className="hidden text-sm text-muted md:block">Signed in as {profile?.fullName || user?.displayName || "Agency staff"}</p>
+          <p className="hidden text-sm text-muted md:block">Signed in as {profile?.fullName || user.displayName}</p>
           <SignOutButton />
         </header>
         <nav className="flex gap-1 overflow-auto border-b border-line bg-paper px-2 py-2 md:hidden">
