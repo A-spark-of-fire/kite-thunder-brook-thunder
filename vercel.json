@@ -1,7 +1,8 @@
 {
-  "functions": {
-    "**/*": {
-      "includeFiles": "_libs/**"
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  }
+  ]
 }

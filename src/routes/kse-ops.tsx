@@ -10,7 +10,11 @@ import { ensureAgencyDesk } from "@/lib/server/profile";
 
 export const Route = createFileRoute("/kse-ops")({
   loader: async () => {
-    await ensureAgencyDesk();
+    try {
+      await ensureAgencyDesk();
+    } catch (err) {
+      console.error("Agency desk loader error:", err);
+    }
     return null;
   },
   component: AgencyOpsPage,
