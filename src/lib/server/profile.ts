@@ -67,18 +67,6 @@ export async function requireAdmin(userId: string): Promise<Profile> {
   return profile;
 }
 
-export const ensureAgencyDesk = createServerFn({ method: "POST" })
-  .handler(async () => {
-    try {
-      const { seedAgencyAccounts } = await import("@/lib/auth/seed-agency");
-      await seedAgencyAccounts();
-    } catch (err) {
-      console.warn("Agency desk account seeding skipped/failed:", err);
-    }
-    return { ok: true as const };
-  });
-
-
 export const getMe = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }): Promise<MePayload> => {
@@ -92,9 +80,13 @@ export const getMe = createServerFn({ method: "GET" })
     const profile = await loadProfile(context.userId);
     const settingsRows = await sql<Record<string, unknown>>`select * from agency_settings where id = 1`;
     const unread = await sql<{ n: number }>`select count(*)::int as n from notifications where user_id = ${context.userId} and is_read = false`;
-    return { profile, settings: mapSettings(settingsRows), unreadCount: num(unread?.n) };
-  });
 
+    return {
+      profile,
+      settings: mapSettings(settingsRows[0] ?? {}),
+      unreadCount: num(unread[0]?.n),
+    };
+  });
 
 export const updateMyProfile = createServerFn({ method: "POST" })
   .middleware([authMiddleware])

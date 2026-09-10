@@ -6,17 +6,9 @@ import { Field, Input } from "@/components/ui/input";
 import { authClient, authEnabled } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { useMe } from "@/lib/queries";
-import { ensureAgencyDesk } from "@/lib/server/profile";
+
 
 export const Route = createFileRoute("/kse-ops")({
-  loader: async () => {
-    try {
-      await ensureAgencyDesk();
-    } catch (err) {
-      console.error("Agency desk loader error:", err);
-    }
-    return null;
-  },
   component: AgencyOpsPage,
 });
 

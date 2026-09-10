@@ -118,7 +118,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-BIGlXMLD.mjs");
+	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-BGhwD4pR.mjs");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -140,7 +140,7 @@ async function getStartManifest(matchedRoutes) {
 var manifest = {
 	"0623f380e2e38cdfa24239b07087a46e8a338e90f061f9eb41c74a4a70e8eff9": {
 		functionName: "adminGetOrder_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"09cfdbca90d4db091d412f337439eb515ac2d763c3ff8aa0f26c068a918c5353": {
 		functionName: "listPaymentMethods_createServerFn_handler",
@@ -148,15 +148,15 @@ var manifest = {
 	},
 	"1adf2a1e37f75fbf14db6c1c320664b023c54d351730c8615d2801c49c5eee75": {
 		functionName: "adminUpdateOrder_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"1bac7929a31e21951e9922798ee5d2877d4b1ad22ece611264aa1a03ae6b10a1": {
 		functionName: "claimAdminDesk_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./profile-DfnJaLDU.mjs")
 	},
 	"2516a54386004386c896f1a0ac5bdf163cb6fe80f8ce05136f7c7b30edbcc98d": {
 		functionName: "updateMyProfile_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./profile-DfnJaLDU.mjs")
 	},
 	"2c4985e96c199268f7f639534cb5e8e31d6b19d43286bf77416413db60ffde26": {
 		functionName: "fetchSessionUser_createServerFn_handler",
@@ -168,7 +168,7 @@ var manifest = {
 	},
 	"3da46047aaa385fcc42b29b24e1cfc9e88c77d927115ea8a642249abb0fd8257": {
 		functionName: "listMyNotifications_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./profile-DfnJaLDU.mjs")
 	},
 	"3e015ee0154b56b9cd44db361c2e0978e439d608cdf1c8d2722a5c5a7fd45965": {
 		functionName: "getPublicSettings_createServerFn_handler",
@@ -176,95 +176,91 @@ var manifest = {
 	},
 	"4096b2026b038348e3866bd521ecc67e4d87fd9fb2bcbcb5a8b133f4d5ff293e": {
 		functionName: "getMyOrder_createServerFn_handler",
-		importer: () => import("./orders-CgV-QULm.mjs")
-	},
-	"40e23c73668f4ab762222509fe7b3eb24ef7704e5e9c43603c5ca108634916f1": {
-		functionName: "ensureAgencyDesk_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./orders-DKC5kthE.mjs")
 	},
 	"422b2e31d50b0e09bf8c7a44776c9efec144c72b1287bfdea87be67de3290400": {
 		functionName: "adminTogglePayment_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"4559ed6bf9a7b05c02163e5741d4be1b6008bb0bb52c25c4782cb2fe0f4383ca": {
 		functionName: "adminSaveSettings_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"47b55f282af337a8053ad8b7a9a7c43a5a576fb942380dd3ccdfacb45eb3bbc5": {
 		functionName: "markNotificationsRead_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./profile-DfnJaLDU.mjs")
 	},
 	"49c6e9aaf5bd863cb68dfd299c8250e41816be5dd4488ff5cc178acd04745bb4": {
 		functionName: "saveMyAddress_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./profile-DfnJaLDU.mjs")
 	},
 	"4ef68c6b9033e9aeec7c04188193b0e60fed577e659692f61a57f0f6b6babe66": {
 		functionName: "submitContact_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./profile-DfnJaLDU.mjs")
 	},
 	"588d427c5c6a9bd05e1014cec0ec3321b2ef1da275509094279b6af46ea31f4e": {
 		functionName: "adminListOrders_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"592e1d67071857e568161a728d09e6d13c5bb09ccb4ba1a1a012b4d76c4f1fda": {
 		functionName: "requestPasswordReset_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./profile-DfnJaLDU.mjs")
 	},
 	"6406231809d31ba8950a82a40792322c0625536ab6f17170901260c406565838": {
 		functionName: "getAdminStats_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"7c6b82e0ce0bba37c904ef67f1d4882c6dde8ee39f59dcea6d97c8935c479940": {
 		functionName: "adminGetSettings_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"96c3c90be288da29c9bf1bf1ed992ffb93d3fc3eb0f0cb071e84d713b896418f": {
 		functionName: "adminListCustomers_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"97c976fe3449882df65ec2917d62762b8ce923ecd6009cbcb59be4b6aebcd1b0": {
 		functionName: "adminSaveAgent_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"9eb5cf55c176a07ab91c61ccd909b5ee4ed2f3c8b3207e785de245a6114e8a28": {
 		functionName: "adminListInbox_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"ba32516f755dd325f1963700893b89e65dd1767b32b7efb896e9aebdc1254d9b": {
 		functionName: "getCurrentDelivery_createServerFn_handler",
-		importer: () => import("./orders-CgV-QULm.mjs")
+		importer: () => import("./orders-DKC5kthE.mjs")
 	},
 	"baa3978ec8f136fead3ca9c175d46f72554d51657981651e8ad14ce9b2c08598": {
 		functionName: "adminListAgents_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"ce04adca7d8cf2e5655362378bfcda50dea2e05cc45f2f7d630ee90c323d90db": {
 		functionName: "cancelMyOrder_createServerFn_handler",
-		importer: () => import("./orders-CgV-QULm.mjs")
+		importer: () => import("./orders-DKC5kthE.mjs")
 	},
 	"d1945e7f257482ecf2137acde558fe8edd242c8fb898534842dc62c930a26d2d": {
 		functionName: "adminSaveProduct_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"d2d387e734d2b9ad38ff263d4ea22b591a11097849ddb7e854b3d1896e2dcb7e": {
 		functionName: "listMyOrders_createServerFn_handler",
-		importer: () => import("./orders-CgV-QULm.mjs")
+		importer: () => import("./orders-DKC5kthE.mjs")
 	},
 	"da559204811580d85f5d2d3a84fe0377e4f596fe27a42bb22c5c70d8ad73226b": {
 		functionName: "adminListPayments_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"e2e2d55e5983cb90d0b95e02e1fd542d12faaf829584a92949606f2e8de3ef3f": {
 		functionName: "getMe_createServerFn_handler",
-		importer: () => import("./profile-klaadS26.mjs")
+		importer: () => import("./profile-DfnJaLDU.mjs")
 	},
 	"e44d25be80bce2b94deb72faf36c4882bfe3911806ab70b7b500f221420cd68e": {
 		functionName: "adminListProducts_createServerFn_handler",
-		importer: () => import("./admin-DqRZ41uo.mjs")
+		importer: () => import("./admin-C3_Gr47m.mjs")
 	},
 	"eff383686543aaf1d3781cf0aaa6a0b80974ddd9537d83f9cfc933b88b01f00f": {
 		functionName: "placeOrder_createServerFn_handler",
-		importer: () => import("./orders-CgV-QULm.mjs")
+		importer: () => import("./orders-DKC5kthE.mjs")
 	}
 };
 async function getServerFnById(id, access) {
@@ -1534,7 +1530,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-COOkL9wh.mjs").then((n) => n.t),
+		import("./router-B0HgtoCy.mjs").then((n) => n.t),
 		import("./start-5Z2QO8AU.mjs"),
 		import("./empty-plugin-adapters-D9UWiqvJ.mjs")
 	]);

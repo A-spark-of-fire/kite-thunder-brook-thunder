@@ -1,7 +1,7 @@
 import { o as __toESM, r as __exportAll } from "../_runtime.mjs";
 import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
 import { s as __exportAll$1 } from "./ssr.mjs";
-import { Bt as createFetch, Ut as capitalizeFirstLetter, Vt as isSafeUrlScheme, Wt as toKebabCase } from "../_libs/@better-auth/core+[...].mjs";
+import { Ct as createFetch, Dt as toKebabCase, Et as capitalizeFirstLetter, wt as isSafeUrlScheme } from "../_libs/@better-auth/core+[...].mjs";
 import { n as PACKAGE_VERSION, r as getBaseURL, t as GENERIC_OAUTH_ERROR_CODES } from "./url-DwGxbmbA.mjs";
 import { n as defu } from "../_libs/defu.mjs";
 import { a as atom, i as onSet, n as STORE_UNMOUNT_DELAY, r as onMount, t as listenKeys } from "../_libs/nanostores.mjs";
