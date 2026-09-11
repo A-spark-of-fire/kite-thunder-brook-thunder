@@ -132,7 +132,7 @@ function MarketingHome() {
               <Button asChild size="lg" variant="secondary"><Link to="/login">I already have an account</Link></Button>
             </div>
           </div>
-          <img src="/brand/poster.webp" alt="SUPEYO packaged drinking water" className="h-56 w-full object-cover object-center sm:h-72" loading="eager" fetchPriority="high"/>
+          <img src="/brand/poster.webp" alt="SUPEYO packaged drinking water" className="h-56 w-full object-cover object-center sm:h-72" loading="eager" fetchPriority="high" style={{ height: "auto" }}/>
         </section>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[{ icon: Droplets, label: "100% Pure" }, { icon: ShieldCheck, label: "Safe & hygienic" }, { icon: Leaf, label: "Natural goodness" }, { icon: HeartPulse, label: "Better health" }].map((item) => (
