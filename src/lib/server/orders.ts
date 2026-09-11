@@ -56,6 +56,7 @@ export const listMyOrders = createServerFn({ method: "GET" })
   .handler(async ({ context }): Promise<Order[]> => {
     const sql = await getSql();
     await ensureProfile(context.userId);
+    await sql`DELETE FROM orders WHERE created_at < NOW() - INTERVAL '90 days'`;
     const rows = await sql.query<Record<string, unknown>>(
       `select ${ORDER_SELECT}
        from orders o

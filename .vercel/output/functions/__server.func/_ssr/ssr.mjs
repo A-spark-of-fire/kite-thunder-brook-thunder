@@ -176,7 +176,7 @@ var manifest = {
 	},
 	"4096b2026b038348e3866bd521ecc67e4d87fd9fb2bcbcb5a8b133f4d5ff293e": {
 		functionName: "getMyOrder_createServerFn_handler",
-		importer: () => import("./orders-DKC5kthE.mjs")
+		importer: () => import("./orders-DZ4trw1X.mjs")
 	},
 	"422b2e31d50b0e09bf8c7a44776c9efec144c72b1287bfdea87be67de3290400": {
 		functionName: "adminTogglePayment_createServerFn_handler",
@@ -228,7 +228,7 @@ var manifest = {
 	},
 	"ba32516f755dd325f1963700893b89e65dd1767b32b7efb896e9aebdc1254d9b": {
 		functionName: "getCurrentDelivery_createServerFn_handler",
-		importer: () => import("./orders-DKC5kthE.mjs")
+		importer: () => import("./orders-DZ4trw1X.mjs")
 	},
 	"baa3978ec8f136fead3ca9c175d46f72554d51657981651e8ad14ce9b2c08598": {
 		functionName: "adminListAgents_createServerFn_handler",
@@ -236,7 +236,7 @@ var manifest = {
 	},
 	"ce04adca7d8cf2e5655362378bfcda50dea2e05cc45f2f7d630ee90c323d90db": {
 		functionName: "cancelMyOrder_createServerFn_handler",
-		importer: () => import("./orders-DKC5kthE.mjs")
+		importer: () => import("./orders-DZ4trw1X.mjs")
 	},
 	"d1945e7f257482ecf2137acde558fe8edd242c8fb898534842dc62c930a26d2d": {
 		functionName: "adminSaveProduct_createServerFn_handler",
@@ -244,7 +244,7 @@ var manifest = {
 	},
 	"d2d387e734d2b9ad38ff263d4ea22b591a11097849ddb7e854b3d1896e2dcb7e": {
 		functionName: "listMyOrders_createServerFn_handler",
-		importer: () => import("./orders-DKC5kthE.mjs")
+		importer: () => import("./orders-DZ4trw1X.mjs")
 	},
 	"da559204811580d85f5d2d3a84fe0377e4f596fe27a42bb22c5c70d8ad73226b": {
 		functionName: "adminListPayments_createServerFn_handler",
@@ -260,7 +260,7 @@ var manifest = {
 	},
 	"eff383686543aaf1d3781cf0aaa6a0b80974ddd9537d83f9cfc933b88b01f00f": {
 		functionName: "placeOrder_createServerFn_handler",
-		importer: () => import("./orders-DKC5kthE.mjs")
+		importer: () => import("./orders-DZ4trw1X.mjs")
 	}
 };
 async function getServerFnById(id, access) {

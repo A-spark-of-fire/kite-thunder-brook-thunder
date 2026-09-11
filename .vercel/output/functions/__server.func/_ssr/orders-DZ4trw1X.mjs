@@ -6,7 +6,7 @@ import { r as getSql } from "./db-DCjHyC-w.mjs";
 import { t as authMiddleware } from "./middleware-BxvY9SVX.mjs";
 import { cn as _enum, gn as object, hn as number, un as array, yn as string } from "../_libs/@better-auth/core+[...].mjs";
 import { a as loadProfile, n as ensureProfile } from "./profile-Qkt-X-zb.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/orders-DKC5kthE.js
+//#region node_modules/.nitro/vite/services/ssr/assets/orders-DZ4trw1X.js
 var placeSchema = object({
 	items: array(object({
 		productId: number().int().positive(),
@@ -55,6 +55,7 @@ var listMyOrders_createServerFn_handler = createServerRpc({
 var listMyOrders = createServerFn({ method: "GET" }).middleware([authMiddleware]).handler(listMyOrders_createServerFn_handler, async ({ context }) => {
 	const sql = await getSql();
 	await ensureProfile(context.userId);
+	await sql`DELETE FROM orders WHERE created_at < NOW() - INTERVAL '90 days'`;
 	const rows = await sql.query(`select ${ORDER_SELECT}
        from orders o
        left join delivery_agents a on a.id = o.assigned_agent_id
