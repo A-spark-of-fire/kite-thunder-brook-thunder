@@ -1,6 +1,9 @@
 Adminlogin.txt
-node_modules/
-.project_id
-.github_repo
+node_modules
+.vercel
 .env
-.env.*
+.env.local
+dist
+.output
+*.log
+
