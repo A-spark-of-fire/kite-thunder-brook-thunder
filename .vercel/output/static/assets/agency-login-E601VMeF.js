@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-0vZSBttN.js";import{S as t}from"./index-thzcd9SJ.js";var n=e(),r=function(){return(0,n.jsx)(t,{to:`/kse-ops`,replace:!0})};export{r as component};
