@@ -55,7 +55,7 @@ function LoginPage() {
             </div>
           </>
         ) : <p className="mt-4 text-sm text-muted">Sign-in is disabled.</p>}
-        <p className="mt-6 text-center text-xs text-muted">{AGENCY.company} · {AGENCY.phones[0]}</p>
+        <p className="mt-6 text-center text-xs text-muted">{AGENCY.company} </p>
       </div>
     </div>
   );
