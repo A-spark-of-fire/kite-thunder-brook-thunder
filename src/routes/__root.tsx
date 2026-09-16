@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/lib/auth/provider";
 import appCss from "../styles.css?url";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const fetchSessionUser = createServerFn({ method: "GET" }).handler(async () => {
   const { getSessionUser } = await import("@/lib/auth/verify.server");
@@ -49,6 +50,7 @@ function RootDocument() {
           <AuthProvider>
             <Outlet />
             <Toaster position="top-center" richColors toastOptions={{ className: "font-sans" }} />
+            <SpeedInsights />
           </AuthProvider>
         </QueryClientProvider>
         <Scripts />
